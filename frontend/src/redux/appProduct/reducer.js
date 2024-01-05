@@ -29,14 +29,14 @@ export const reducer = (state = initState, action) => {
       };
 
     case PRODUCTFAIL:
-      return { ...state, isLoading: false, isError: false };
+      return { ...state, isLoading: false, isError: true };
     case DELETELOADING:
       return { ...state, isLoading: true, isError: false };
     case DELETEFAIL:
       return { ...state, isLoading: false, isError: true };
     case DELETESUCESS:
       let prodsAfterDelete = [...state.products].filter(
-        (el) => el._id != action.payload
+        (el) => el._id !== action.payload
       );
       return {
         ...state,
@@ -49,7 +49,7 @@ export const reducer = (state = initState, action) => {
     case ADDFAIL:
       return { ...state, isLoading: false, isError: true };
     case ADDSUCESS:
-      let prodsAfterAdding = [...state.products, action.payload];//newly added product
+      let prodsAfterAdding = [...state.products, action.payload]; //newly added product
       return {
         ...state,
         isLoading: false,

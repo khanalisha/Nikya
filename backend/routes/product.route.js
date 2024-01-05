@@ -22,6 +22,7 @@ product.get("/api/products", async (req, res) => {
   console.log(order,gender,category, "a");
   try {
     const filter = { name: { $regex: new RegExp(name, "i") } };
+    console.log(filter)
     if (gender) {
       filter.gender = gender;
     }

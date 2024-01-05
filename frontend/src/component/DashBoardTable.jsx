@@ -18,18 +18,18 @@ export const DashBoardTable = ({
   );
   const token = useSelector((store) => store.authuser.token);
   console.log(token, "dash aa");
-  console.log(products);
+  console.log(products, "pro");
 
   useEffect(() => {
     const filter_sort = {
       name: search,
-      // category: categoryFilter,
-      // gender: genderFilter || undefined,
+
       sort: "price",
       order: order || "asc",
     };
     dispatch(getProducts(filter_sort));
-  }, [search, order, genderFilter, categoryFilter, dispatch]);
+  }, [search, order, categoryFilter, genderFilter, dispatch]); // category: categoryFilter,
+  // gender: genderFilter,
 
   const OpenModal = () => {
     setIsModalOpen(true);

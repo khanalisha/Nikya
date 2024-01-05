@@ -55,7 +55,6 @@ export const reducer = (state = initState, action) => {
         isLoading: false,
         isError: false,
         loggedInUser: action.payload,
-        
       };
     default:
       return { ...state };

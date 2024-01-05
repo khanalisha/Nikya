@@ -50,13 +50,13 @@ export const Login = () => {
         });
 
         navigate("/dashboard");
-        // toast("success", "Login successful!");
+       
         alert("Login successful!");
       }
     } catch (error) {
       console.log(error);
       dispatch({ type: POST_LOGIN_ERROR });
-      // toast("error", "Oops! Login failed!");
+     
     }
   };
   return (

@@ -68,11 +68,13 @@ export const SignUp = () => {
       dispatch({
         type: POST_CREATEUSER_SUCCESS,
       });
-      // toast("success", "Account created successfully");
+
+      alert("Account created successfully");
     } catch (error) {
       console.log(error);
       dispatch({ type: POST_CREATEUSER_ERROR });
-      // toast("error", "Oops! Something went wrong");
+    
+      alert("Opss Something wrong...");
     }
   };
 
