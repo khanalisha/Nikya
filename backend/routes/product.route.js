@@ -1,5 +1,5 @@
 const express = require("express");
-const { ProductModel } = require("../model/product.mode");
+const { ProductModel } = require("../model/product.model");
 const { auth } = require("../middleware/auth");
 
 const product = express.Router();
@@ -17,12 +17,22 @@ product.post("/api/products", async (req, res) => {
 });
 
 product.get("/api/products", async (req, res) => {
-  const { name, order } = req.query;
-  console.log(name, order, "a");
+  // const { name, order } = req.query;
+  const { name, sort, order, gender, category  } = req.query;
+  console.log(order,gender,category, "a");
   try {
-    const products = await ProductModel.find({
-      name: { $regex: new RegExp(name, "i") },
-    }).sort({ price: order === "desc" ? -1 : 1 });
+    const filter = { name: { $regex: new RegExp(name, "i") } };
+    if (gender) {
+      filter.gender = gender;
+    }
+
+    if (category) {
+      filter.category = category;
+    }
+
+    const products = await ProductModel.find(filter).sort({
+      [sort]: order === "desc" ? -1 : 1,
+    });
     res.status(200).json({ msg: "Product is added", products });
   } catch (error) {
     res.status(400).json({ error: error });
@@ -33,11 +43,10 @@ product.patch("/api/products/:id", async (req, res) => {
   const id = req.params.id;
   console.log(id);
   const updateProduct = req.body;
-  const username = req.body.name;
 
   try {
     const singleProduct = await ProductModel.findByIdAndUpdate(
-      { _id: id, username },
+      { _id: id },
       updateProduct,
       { new: true }
     );

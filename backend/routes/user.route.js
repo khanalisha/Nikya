@@ -3,18 +3,27 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { UserModel } = require("../model/user.model");
+const upload = require("../middleware/upload");
 const userRouter = express.Router();
 
-userRouter.post("/api/register", async (req, res) => {
-  const { name, avatar, email, password } = req.body;
+userRouter.post("/api/register", upload.single("avatar"), async (req, res) => {
+  const { name, email, password } = req.body;
+  let avatar;
+  if (req.file) {
+    avatar = req.file ? req.file.path : "";
+  }
   try {
     const existinguser = await UserModel.findOne({ email });
     if (existinguser) {
-      res.status(400).json({ msg: "use another mail this is already there!" });
+      return res
+        .status(400)
+        .json({ msg: "use another mail this is already there!" });
     } else {
       bcrypt.hash(password, 5, async (err, hash) => {
         const user = new UserModel({
-          ...req.body,
+          name,
+          email,
+          avatar,
           password: hash,
         });
         await user.save();
@@ -25,7 +34,6 @@ userRouter.post("/api/register", async (req, res) => {
     res.status(400).json({ error: error });
   }
 });
-
 
 userRouter.post("/api/login", async (req, res) => {
   const { email, password } = req.body;

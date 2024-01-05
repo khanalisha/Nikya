@@ -6,8 +6,7 @@ import { AllRoutes } from "./route/AllRoutes";
 function App() {
   return (
     <div className="App bg-background text-text">
-      <Home />
-   
+      <AllRoutes />
     </div>
   );
 }

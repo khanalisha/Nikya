@@ -1,6 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export const SideBar = ({ setSelected }) => {
+  const navigate = useNavigate();
+  const avatar = localStorage.getItem("avatar");
+  console.log(avatar);
+  const token = localStorage.getItem("token");
+
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("avatar");
+
+    navigate("/login");
+  };
   return (
     <div className="w-56 h-1184vh bg-primary-200 shrink-0 main-sidebar">
       <p className="text-[#013CC6] text-2xl not-italic font-medium sideP">
@@ -23,7 +35,10 @@ export const SideBar = ({ setSelected }) => {
             <img src="clipboard-tick.svg" alt="clip" className="logo" />
             <span className="logoP2">Analytics</span>
           </div>
-          <div className="flex gap-4 my-6 items-center justify-between">
+          <div
+            className="flex gap-4 my-6 items-center justify-between"
+            onClick={handleLogOut}
+          >
             <img src="setting-2.svg" alt="settings" className="logo" />
             <span className="logoP2">Logout</span>
           </div>

@@ -2,14 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @layer utilities {
-  /* .btn {
-    border: 2px solid;
-    @apply text-text bg-primary-100 border-primary-100;
-    padding: 0.25rem 1.25rem;
-    border-radius: 4px;
-    font-weight: 500;
-  } */
+  .btn {
+    text-align: center;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 800;
+line-height: 22px;
+text-transform: uppercase;
+background-color:#0E1866;
+color:white;
+padding:0.75rem 1.75rem;
+border-radius: 0.25rem;
+  }
   .main-sidebar {
     padding: 63px 9px;
   }
@@ -74,7 +81,7 @@
     justify-content: space-between;
     width: 1129px;
     align-items: center;
-    padding-left: 20px;
+    /* padding-left: 20px; */
   }
   .inputDiv {
     width: 655px;
@@ -127,10 +134,10 @@
 
   /* Dashboard */
 
-  .dash-main {
+  /* .dash-main {
     padding-top: 32px;
     padding-left: 32px;
-  }
+  } */
   .heading {
     display: flex;
     border: 2px solid black;
